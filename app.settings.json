@@ -1,0 +1,208 @@
+app.settings.json
+{
+    "AllowedHosts": "*",
+    "WorkNavigationSystem": {
+        //"Cors": [],
+        "Cors": [ "http://localhost:8080" ],
+        "Lines": [
+            {
+                "Name": "SA",
+                "SemaphoreId": "Global\\f5a69a6644d1409599858ce54cad0143",
+                "Slmp": {
+                    //"Address": "10.10.11.1",
+                    //"Address": "localhost",
+                    "Address": "10.11.201.164",
+                    //"Address": "10.75.2.51",
+                    "Port": 1024 //1024 //1025 //1026
+                },
+                "IntervalMsec": 1000,
+                "Tasks": [
+                    /*{
+                    "Name": "ストロー",
+                    "RemainingTime": "ZR1502"
+                },*/
+                    {
+                        "Name": "メルト1",
+                        "RemainingTime": "ZR1504"
+                    },
+                    {
+                        "Name": "メルト2",
+                        "RemainingTime": "ZR1506"
+                    },
+                    /*{
+                    "Name": "メルト3",
+                    "RemainingTime": "ZR1508"
+                },*/
+                    {
+                        "Name": "段ボール",
+                        "RemainingTime": "ZR1510"
+                    },
+                    /*{
+                    "Name": "シュリンク",
+                    "RemainingTime": "ZR1512"
+                },*/
+                    /*{
+                    "Name": "ストレッチ",
+                    "RemainingTime": "ZR1514"
+                },*/
+                    {
+                        "Name": "パレット",
+                        "Status": [ "L800", "L801", "L802" ]
+                    }
+                ]
+            },
+            {
+                "Name": "SB",
+                "SemaphoreId": "Global\\4f67cc54834d4e07bd2c52a91a16e36a",
+                "Slmp": {
+                    //"Address": "10.10.11.1",
+                    //"Address": "localhost",
+                    "Address": "10.11.201.174",
+                    //"Address": "10.75.2.51",
+                    "Port": 1024 //1024 //1026
+                },
+                "IntervalMsec": 1000,
+                "Tasks": [
+                    /*{
+                    "Name": "ストロー",
+                    "RemainingTime": "ZR1502"
+                },*/
+                    {
+                        "Name": "メルト1",
+                        "RemainingTime": "ZR1504"
+                    },
+                    {
+                        "Name": "メルト2",
+                        "RemainingTime": "ZR1506"
+                    },
+                    {
+                        "Name": "メルト3",
+                        "RemainingTime": "ZR1508"
+                    },
+                    {
+                        "Name": "段ボール",
+                        "RemainingTime": "ZR1510"
+                    },
+                    /*{
+                    "Name": "シュリンク",
+                    "RemainingTime": "ZR1512"
+                },*/
+                    /*{
+                    "Name": "ストレッチ",
+                    "RemainingTime": "ZR1514"
+                },*/
+                    {
+                        "Name": "パレット",
+                        "Status": [ "L800", "L801", "L802" ]
+                    }
+                ]
+            },
+            {
+                "Name": "SC",
+                "SemaphoreId": "Global\\aaa9f1d160ae4642a37e2b8e797d8a30",
+                "Slmp": {
+                    //"Address": "10.10.11.1",
+                    //"Address": "localhost",
+                    "Address": "10.11.201.84",
+                    //"Address": "10.75.2.51",
+                    "Port": 1024 // 1024 //1027 //1026
+                },
+                "IntervalMsec": 1000,
+                "Tasks": [
+                    /*{
+                    "Name": "ストロー",
+                    "RemainingTime": "ZR1502"
+                },*/
+                    {
+                        "Name": "メルト1",
+                        "RemainingTime": "ZR1504"
+                    },
+                    {
+                        "Name": "メルト2",
+                        "RemainingTime": "ZR1506"
+                    },
+                    /*{
+                    "Name": "メルト3",
+                    "RemainingTime": "ZR1508"
+                },*/
+                    {
+                        "Name": "段ボール",
+                        "RemainingTime": "ZR1510"
+                    },
+                    /*{
+                    "Name": "シュリンク",
+                    "RemainingTime": "ZR1512"
+                },*/
+                    /*{
+                    "Name": "ストレッチ",
+                    "RemainingTime": "ZR1514"
+                },*/
+                    {
+                        "Name": "パレット",
+                        "Status": [ "L800", "L801", "L802" ]
+                    }
+                ]
+            }
+        ]
+    },
+    "Serilog": {
+        "Using": [
+            "Serilog.Sinks.Console",
+            "Serilog.Sinks.File"
+            //"Serilog.Enrichers.ClientInfo"
+        ], //ファイルに出力
+        "MinimumLevel": {
+            "Default": "Debug",
+            "Override": {
+                "Microsoft": "Warning",
+                "Microsoft.AspNetCore.Hosting.Diagnostics": "Error",
+                "Microsoft.Hosting.Lifetime": "Information"
+            }
+        },
+        //"MinimumLevel": "Information",
+        //最小ログレベル
+        //"Default": "Verbose"
+        //"Default": "Debug"
+        //"Default": "Information"
+        //"Default": "Warning"
+        //"Default": "Error"
+        //"Default": "Fatal"        
+        "WriteTo": [
+            { "Name": "Console" },
+            {
+                "Name": "File",
+                "Args": {
+                    //ログファイルパス
+                    "path": "Logs/all.log",
+                    //ログファイルのフォーマット
+                    //"outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} | [{Level:u3}] | {ThreadId:00}:{ThreadName} | {ProcessId:00}:{ProcessName} | {Message:lj} | {AssemblyName} | {AssemblyVersion} | {MachineName} | {EnvironmentUserName} | {MemoryUsage} B | {NewLine}{Exception}",
+                    "outputTemplate": "[{ClientIp}] {ThreadId:00} | {Timestamp:yyyy-MM-dd HH:mm:ss.fff} | [{Level:u3}] | {Message:lj} | {MemoryUsage} B | {NewLine}{Exception}",
+                    //1日毎にロールする
+                    "rollingInterval": "Day",
+                    //直近の7ファイルを保持する（デフォルトでは直近の31ファイル）
+                    "retainedFileCountLimit": 7,
+                    //ファイルサイズの制限を削除（デフォルトでは1GB）
+                    "fileSizeLimitBytes": null,
+                    //書き込みをバッファリングする
+                    "buffered": false //true
+                    //JSON形式のstructuredログにする場合
+                    // "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact"
+                }
+            }
+        ],
+        "Enrich": [
+            //拡張
+            "WithThreadId", //スレッドID
+            "WithThreadName", //スレッド名
+            "WithMachineName", //マシン名
+            "WithEnvironmentUserName", //ユーザー名
+            "WithProcessId", //プロセスID
+            "WithProcessName", //プロセス名
+            "WithAssemblyName", //アセンブリ名
+            "WithAssemblyVersion", //アセンブリバージョン
+            "WithMemoryUsage", //メモリ使用量
+            "WithExceptionDetails", //例外の詳細情報
+            "WithClientIp"
+        ]
+    }
+}

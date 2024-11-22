@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      image: kagome_app
+    volumes:
+      - .:/kagome
+      - /kagome/node_modules
+    ports:
+      - "8080:8080"
+
+# version: '3' # composeのバージョン指定
+# services: # 上げるサービスを以下に定義する
+#   app: # 上げるサービスの識別子
+#     build: .  # ビルドするDockerfile（ファイル名Dockerfileなら名称不要）のパス指定
+#     container_name: devlelop_cp # コンテナの識別子
+#     ports:
+#       - '60222:8080' # [ローカル:コンテナ]
+#     volumes: # [ローカル:コンテナ](ローカル→コンテナの指定ディレクトリにマウント)
+#       - .:/frontapp
+#     stdin_open: true # コンテナの標準出力をオープンしたままにする。(※docker runコマンドの -i オプション)
+#     tty: true # コンテナをrun状態で常駐させるために設定（※docker runコマンドの -t オプション）
